@@ -30,6 +30,7 @@ main {
     background-color: white;
     width: 100%;
     grid-area: m;
+    min-height: 90vh;
 }
 
 footer {
