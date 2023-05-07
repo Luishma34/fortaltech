@@ -88,7 +88,7 @@ include_once "conexao.php";
                                 <hr class="divider">
                             </li>
                             <div class="card-body">
-                                <div>
+                                <div> 
                                     <h5 class="card-title">R$<?php echo number_format($produto['valor'], 2, ',', '.'); ?></h5>
                                     <p class="card-text"><?php echo $produto['nome']; ?></p>
                                 </div>
