@@ -13,25 +13,25 @@
             <div class="offcanvas-body">
                 <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                     <?php
-                    $URL_ATUAL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+                    $PAG_ATUAL = "$_SERVER[REQUEST_URI]";
                     ?>
                     <li class="nav-item">
                         <a class="nav-link <?php
-                                            if ($URL_ATUAL == 'http://localhost/ft/index.php') {
+                                            if ("$_SERVER[REQUEST_URI]" == '/ft/index.php') {
                                                 echo 'active';
                                             }
                                             ?>" aria-current="page" href="index.php">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link <?php
-                                            if ($URL_ATUAL == 'http://localhost/ft/produtos.php') {
+                                            if ("$_SERVER[REQUEST_URI]" == '/ft/produtos.php') {
                                                 echo 'active';
                                             }
                                             ?>" href="produtos.php">Produtos</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle <?php
-                                                            if ($URL_ATUAL == 'http://localhost/ft/cadastrar.php' || $URL_ATUAL == 'http://localhost/ft/entrar.php') {
+                                                            if ("$_SERVER[REQUEST_URI]" == '/ft/cadastrar.php' || "$_SERVER[REQUEST_URI]" == '/ft/entrar.php' || "$_SERVER[REQUEST_URI]" == '/ft/conta.php') {
                                                                 echo 'active';
                                                             }
                                                             ?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
