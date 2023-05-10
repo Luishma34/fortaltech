@@ -51,18 +51,18 @@ include_once "conexao.php";
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
     <script src="js.js"></script>
 
-    <?php require_once "template/modal_sair.php";  ?> 
+    <?php require_once "template/modal_sair.php";  ?>
 </body>
 <?php
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
-    $email = $_POST["email"];
-    $senha = $_POST["senha"];
+    $email = $mysqli->real_escape_string($_POST['email']);
+    $senha = $mysqli->real_escape_string($_POST['senha']);
 
 
-    if (empty($email) || empty($senha)) {
+    if (empty(trim($email)) || empty(trim($senha))) {
         echo "<script>
         var alert = document.getElementById('alert')
         alert.innerHTML = `<div class='text-danger h6 mb-3'><i class='bi bi-exclamation-circle'></i>Dados inválidos!</div>`

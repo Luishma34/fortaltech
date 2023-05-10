@@ -60,11 +60,11 @@ include_once "conexao.php";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
-    $nome = $_POST["nome"];
-    $email = $_POST["email"];
-    $senha = $_POST["senha"];
+    $email = $mysqli->real_escape_string($_POST['email']);
+    $nome = $mysqli->real_escape_string($_POST['nome']);
+    $senha = $mysqli->real_escape_string($_POST['senha']);
 
-    if (empty($nome) || empty($email) || empty($senha)) {
+    if (empty(trim($nome)) || empty(trim($email)) || empty(trim($senha))) {
         echo "<script>
         var alert = document.getElementById('alert')
         alert.innerHTML = `<div class='text-danger h6 mb-3'><i class='bi bi-exclamation-circle'></i>Dados inválidos!</div>`

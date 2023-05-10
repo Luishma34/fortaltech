@@ -60,7 +60,7 @@ main {
 }
 
 #pesquisar-btn:hover {
-    color: #0b36cd;
+    color: #000000;
     background-color: rgb(255, 255, 255);
 }
 
@@ -270,7 +270,7 @@ a {
 
 #btn-comprar {
     color: white;
-    background-color: #0b36cd;
+    background-color: #000000;
     border-color: white;
     padding: 10px 20px;
     font-weight: bolder;
@@ -301,3 +301,6 @@ a {
 .img-produto{
     max-height: 60vh;
 }
+
+/* campo */
+
