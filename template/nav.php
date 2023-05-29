@@ -31,7 +31,7 @@
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle <?php
-                                                            if ("$_SERVER[REQUEST_URI]" == '/ft/cadastrar.php' || "$_SERVER[REQUEST_URI]" == '/ft/entrar.php' || "$_SERVER[REQUEST_URI]" == '/ft/conta.php') {
+                                                            if ("$_SERVER[REQUEST_URI]" == '/ft/cadastrar.php' || "$_SERVER[REQUEST_URI]" == '/ft/entrar.php' || "$_SERVER[REQUEST_URI]" == '/ft/conta.php' || strpos($_SERVER['REQUEST_URI'], '/ft/pedidos.php') !== false ) {
                                                                 echo 'active';
                                                             }
                                                             ?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -40,7 +40,8 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <?php
                             if (isset($_SESSION['id'])) {
-                                echo '<li><a class="dropdown-item" href="conta.php">Conta</a></li>
+                                echo '<li><a class="dropdown-item" href="conta.php">Minha Conta</a></li>
+                                <li><a class="dropdown-item" href="pedidos.php">Meus Pedidos</a></li>
                                         <li><button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#sair">Sair</button></li>';
                             } else {
                                 echo '<li><a class="dropdown-item" href="cadastrar.php">Cadastrar</a></li>

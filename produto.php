@@ -46,7 +46,7 @@ include_once "conexao.php";
                              
                             <?php
                             if (isset($_SESSION['id'])) {
-                            ?><button class="btn w-100 mt-1" id="btn-comprar"><strong>Comprar</strong></button> <?php
+                            ?><a class="btn w-100 mt-1" id="btn-comprar" href="compra.php?produto=<?php echo $id_produto; ?>" role="button"><strong>Comprar</strong></a> <?php
                                                                                         } else {
                                                                                             ?>
                                 <a href="entrar.php" class="btn w-100 mt-1" id="btn-comprar">Entre em sua conta</a>
