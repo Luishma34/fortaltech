@@ -9,7 +9,7 @@
                 Tem certeza que deseja sair?
             </div>
             <div class="modal-footer">
-                <form action="sair.php" method="POST">
+                <form action="/ft/sair.php" method="POST">
                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Não</button>
                     <button type="submit" class="btn btn-danger">Sim</button>
                 </form>

@@ -49,7 +49,7 @@ include_once "conexao.php";
                             ?><a class="btn w-100 mt-1" id="btn-comprar" href="compra.php?produto=<?php echo $id_produto; ?>" role="button"><strong>Comprar</strong></a> <?php
                                                                                         } else {
                                                                                             ?>
-                                <a href="entrar.php" class="btn w-100 mt-1" id="btn-comprar">Entre em sua conta</a>
+                                <a href="conta/entrar.php" class="btn w-100 mt-1" id="btn-comprar">Entre em sua conta</a>
                                 <p>*você precisa ter uma conta e estar logado para comprar</p>
                             <?php } ?>
 
