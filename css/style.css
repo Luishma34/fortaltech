@@ -38,6 +38,10 @@ footer {
     width: 100%;
 }
 
+#footer{
+    color: rgb(138, 145, 152);
+}
+
 .tela {
     background-color: rgb(255, 255, 255);
     display: grid;
@@ -46,12 +50,6 @@ footer {
     grid-template-areas: "h h"
         "m  m"
         "f f";
-}
-
-main {
-    /* background-color: rgb(221, 218, 218); */
-    
-    /* min-height: 100vh; */
 }
 
 #pesquisar-btn {
@@ -73,16 +71,19 @@ main {
 }
 
 #logo1 {
-    color: white;
-    font-family: 'Roboto', serif;
-    /* font-family: 'Playfair Display', serif; */
+    color: #007bff;
+    font-size: 24px;
+    font-weight: bold;
+    /* margin: 10px; */
+    text-decoration: none;
 }
 
 
 
 #logo2 {
-    font-family: 'Roboto', serif;
-    color: #0b36cd;
+    /* font-family: 'Roboto', serif; */
+    /* color: #0b36cd; */
+    color: white;
 }
 
 #tela-inicial {
@@ -145,13 +146,15 @@ a {
 
 #listar-produtos {
     display: flex;
+    justify-content: center;
+    align-items: center;
     margin-left: auto;
     margin-right: auto;
     flex-wrap: wrap;
 }
 
 .card-img-top {
-    height: 150px;
+    height: 160px;
     border-radius: 5px 5px 0 0;
 }
 
@@ -162,6 +165,7 @@ a {
 
 .card {
     list-style: none;
+    margin-bottom: 15px;
     border-radius: 5px 5px 0 0;
     /* box-shadow: 0px 0px 5px black; */
     transition: box-shadow 0.3s ease-in-out;
@@ -171,6 +175,13 @@ a {
     height: 65vh;
 }
 
+.nome-produto {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
 .card:hover {
     box-shadow: 0px 0px 4px #1a1a1a;
 }
@@ -183,24 +194,31 @@ a {
 }
 
 .mensagem {
-    background-color: #0b36cd;
+    background-color: #007bff;
     width: 95vw;
     border-radius: 20px;
 }
 
 .card .img {
-    max-height: 60%;
+    max-height: 100%;
     padding: 15px;
 }
 
+.card-img-top {
+    object-fit: contain;
+  }
+  
+  
 #btn-card {
+    font-weight: bold;
+    border-radius: 0;
     color: white;
     background-color: #000000;
     border-color: white;
 }
 
 #btn-card:hover {
-    background-color: blue;
+    background-color: #007bff;
 }
 
 #produtos {
@@ -223,6 +241,12 @@ a {
     height: 90vh;
 }
 
+.conta-container{
+    height: 70vh;
+    width: 50vw;
+
+}
+
 /* CSS do arquivo entrar */
 #form {
     /* background-color: #0b36cd; */
@@ -233,32 +257,19 @@ a {
     padding: 40px;
 }
 
-#btn-form {
-    /* background-color: black;
-    border: none;
-    color: white; */
-    /* color: white;
-    border-color: black; */
-}
 
-#btn-form:hover {
-    /* color: white; */
-    /* background-color: #217ac2; */
-    /* background-color: blue; */
-    /* border-color: white; */
-}
 
 #tela-produtos {
     background-color: rgb(221, 218, 218);
-    margin-left: auto;
-    margin-right: auto;
 }
 
 .todosprodutos {
     display: flex;
-    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
     flex-wrap: wrap;
-    margin: 5px 5px 5px 5px;
 
 }
 
@@ -278,11 +289,11 @@ a {
 }
 
 #btn-comprar:hover {
-    background-color: blue;
+    background-color: #007bff;
 }
 
 .valor {
-    color: #0b36cd;
+    color: #007bff;
     font-size: 1.5rem;
     font-weight: bolder;
 }
@@ -303,7 +314,13 @@ a {
     max-height: 60vh;
 }
 
-/* campo */
+#btn-apagar {
+    text-decoration: none;
+    background:none;
+    border: none;
+    font-weight: bold;
+
+}
 
 
 

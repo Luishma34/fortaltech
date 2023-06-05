@@ -21,41 +21,55 @@ include_once "../conexao.php";
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>
-    <div class="tela">
         <header>
             <?php require_once "../template/nav.php";  ?>
         </header>
         <div class="tela">
-            <main class="tela-conta">
+            <main>
                 <?php
                 $result = $mysqli->query("SELECT * FROM clientes WHERE id_cliente = " . $_SESSION['id'] . "");
                 $cliente = $result->fetch_assoc(); ?>
 
-                <div class="container">
-                    <form class="row" method="post">
+                <div class="conta-container  container d-flex flex-column align-items-center justify-content-center   p-3">
+                    <form class="" method="post">
                         <div class="row mb-4">
-                            <h2 class="h2 text-center">Conta</h2>
+                            <h1 class="h1 text-center">Conta</h1>
                         </div>
-                        <div class="col">
-                            <label for="" class="row">Nome:</label>
-                            <label for="" class="row">Email:</label>
-                            <label for="" class="row">Confirmar senha:</label>
-                            <label for="" class="row">Nova senha(opcional):</label>
+                        <div class="form-group row mb-3">
+                            <label for="nome" class="col-sm col-form-label text-right">Nome</label>
+                            <div class="col-sm">
+                                <input type="text" class="form-control" id="nome" name="nome" value="<?php echo $cliente['nome']  ?>" required>
+                            </div>
                         </div>
-                        <div class="col">
-                            <input type="text" id="nome" value="<?php echo $cliente['nome']  ?>" class="row" required name="nome">
-                            <input type="text" id="email" value="<?php echo $cliente['email']  ?>" class="row" required name="email">
-                            <input type="password" id="senha" class="row" required name="senha">
-                            <input type="password" id="nova_senha" class="row" name="nova_senha">
-
+                        <div class="form-group row mb-3">
+                            <label for="email" class="col-sm col-form-label text-right">Email</label>
+                            <div class="col-sm">
+                                <input type="text" class="form-control" id="email" name="email" value="<?php echo $cliente['email']  ?>" required>
+                            </div>
                         </div>
-                        <div id="alert"></div>
-                        <button type="submit" name="excluir_conta">Excluir Conta</button>
-                        <button type="submit" name="atualizar_conta">Atualizar Conta</button>
+                        <div class="form-group row mb-3">
+                            <label for="senha" class="col-sm col-form-label text-right">Confirmar Senha</label>
+                            <div class="col-sm">
+                                <input type="password" class="form-control" id="senha" name="senha" required>
+                            </div>
+                        </div>
+                        <div class="form-group row mb-3">
+                            <label for="nova_senha" class="col-sm col-form-label text-right">Nova Senha(opcional)</label>
+                            <div class="col-sm">
+                                <input type="password" class="form-control" id="nova_senha" name="nova_senha">
+                            </div>
+                        </div>
+                        <div id="alert" class="text-center"></div>
+                        <div class="form-group row mb-3">
+                            <div class="d-flex justify-content-around">
+                                <button class="btn btn-danger" type="submit" name="excluir_conta">Excluir Conta</button>
+                                <button class="btn btn-primary" type="submit" name="atualizar_conta">Atualizar Conta</button>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </main>
@@ -72,7 +86,10 @@ include_once "../conexao.php";
 
             if (!empty($senha) && $senha == $cliente['senha']) {
                 if (isset($_POST['excluir_conta'])) {
-                    $mysqli->query("DELETE FROM clientes WHERE id_cliente = " . $_SESSION['id'] . "");
+                    $mysqli->query("DELETE FROM vendas  WHERE id_cliente = " . $_SESSION['id']);
+                    $mysqli->query("DELETE FROM endereco WHERE id_cliente = " . $_SESSION['id']);
+                    $mysqli->query("DELETE FROM cartao WHERE id_cliente = " . $_SESSION['id']);
+                    $mysqli->query("DELETE FROM clientes WHERE id_cliente = " . $_SESSION['id']);
                     echo "<script>
                     alert('Conta excluída com sucesso!');
                     window.location.href = 'http://localhost/ft/sair.php';
@@ -124,13 +141,12 @@ include_once "../conexao.php";
         }
 
         ?>
-    </div>
 
     <div class="container">
         <?php require_once "../template/footer.php";  ?>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-    <script src="../js.js"></script>
+    <script src="../js/js.js"></script>
     <?php require_once "../template/modal_sair.php";  ?>
 </body>
 

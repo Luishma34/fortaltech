@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark" aria-label="Offcanvas navbar large">
     <div class="container-fluid">
-        <a class="navbar-brand d-flex" id="logo1" href="index.php">Fortal<div id="logo2">Tech</div></a>
+    <a class="navbar-brand d-flex" id="logo1" href="/ft/index.php">Fortal<div id="logo2">Tech</div></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -15,6 +15,12 @@
                     <?php
                     $PAG_ATUAL = "$_SERVER[REQUEST_URI]";
                     ?>
+                    <?php if (isset($_SESSION['admin'])) { ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/ft/admin/admin.php">Admin</a>
+                        </li>
+                    <?php } ?>
+
                     <li class="nav-item">
                         <a class="nav-link <?php
                                             if ("$_SERVER[REQUEST_URI]" == '/ft/index.php') {
@@ -31,7 +37,7 @@
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle <?php
-                                                            if (strpos($_SERVER['REQUEST_URI'], 'conta/') !== false ) {
+                                                            if (strpos($_SERVER['REQUEST_URI'], 'conta/') !== false) {
                                                                 echo 'active';
                                                             }
                                                             ?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -51,8 +57,8 @@
                         </ul>
                     </li>
                 </ul>
-                <form class="d-flex mt-3 mt-lg-0" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Pesquisar" aria-label="Search">
+                <form method="GET" class="d-flex mt-3 mt-lg-0" action="/ft/pesquisa.php" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Pesquisar" name="produto" aria-label="Search">
                     <button class="btn" id="pesquisar-btn" type="submit">Pesquisar</button>
                 </form>
             </div>

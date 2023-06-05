@@ -13,7 +13,7 @@ include_once "conexao.php";
 
     <title>FortalTech</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,6 +26,7 @@ include_once "conexao.php";
     </header>
     <main id="tela-produtos">
         <div class="todosprodutos">
+        <div class="d-flex flex-wrap mt-2 mb-2">
             <?php
             $sql_query = $mysqli->query('SELECT * FROM `produtos`') or die("Falha na execução do código SQL: " . $mysqli->error);
 
@@ -44,19 +45,21 @@ include_once "conexao.php";
                     </li>
                     <div class="card-body">
                         <h5 class="card-title">R$<?php echo number_format($produto['valor'], 2, ',', '.'); ?></h5>
-                        <p class="card-text"><?php echo $produto['nome']; ?></p>
-                       
-                        <a href="produto.php?produto=<?php echo $produto['id_produto']; ?>" class="btn btn-primary w-100 mt-2" id="btn-card">Comprar</a>
+                        <p class="card-text nome-produto"><?php echo $produto['nome']; ?></p>
+                    
+                        
                     </div>
+                    <a href="produto.php?produto=<?php echo $produto['id_produto']; ?>" class="btn btn-primary w-100 mt-2" id="btn-card">Comprar</a>
                 </div>
             <?php endforeach; ?>
+        </div>
         </div>
     </main>
     <div class="container">
         <?php require_once "template/footer.php";  ?>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-    <script src="js.js"></script>
+    <script src="js/js.js"></script>
     <?php require_once "template/modal_sair.php";  ?>
 </body>
 

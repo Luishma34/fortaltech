@@ -1,0 +1,78 @@
+/* Estilo para o menu lateral */
+#sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 15vw;
+    background-color: rgb(0, 0, 0);
+}
+
+body {
+    width: 100vw;
+    font-weight: bold;
+}
+
+/* Estilo para a logo */
+#logo1 {
+    color: #007bff;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 10px;
+    text-decoration: none;
+}
+
+
+
+#logo2 {
+    color: white;
+}
+
+/* Estilo para os links do menu */
+#sidebar .nav-link {
+    color: #808080;
+}
+
+/* Estilo para o link ativo */
+#sidebar .nav-link.active {
+    color: #007bff;
+}
+
+/* Estilo para o conteúdo da página */
+
+#content {
+    width: 85vw;
+    margin-left: 15vw;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-weight: bold;
+}
+
+.vendas {
+    color: #007bff;
+    margin: 20px;
+    font-weight: bold;
+    font-size: 1.5rem;
+
+}
+
+.table {
+    max-width: 87%;
+}
+
+td {
+    font-weight: bold;
+    color: #007bff;
+}
+
+#btn-apagar, #btn-editar {
+    text-decoration: none;
+    background:none;
+    border: none;
+    font-weight: bold;
+
+}
