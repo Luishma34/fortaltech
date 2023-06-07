@@ -2,9 +2,7 @@
 $id_produto = $_POST['id_produto'];
 $result = $mysqli->query("SELECT * FROM produtos WHERE id_produto = $id_produto");
 $produto = $result->fetch_assoc();
-// Verifica se o formulário foi enviado
 if (isset($_POST['submit'])) {
-    // Obtém os dados do formulário
     $nome = trim($_POST['nome']);
     $estoque = trim($_POST['estoque']);
     $valor = trim($_POST['valor']);
@@ -16,21 +14,17 @@ if (isset($_POST['submit'])) {
         echo "<script>alert('Preencha todos os campos!');</script>";
     } else if (isset($_POST['atualizar_imagem']) && $_POST['atualizar_imagem'] == 'sim') {
         if (isset($_FILES['img']) && $_FILES['img']['error'] == 0) {
-            // Obtém a extensão do arquivo da imagem
             $img_ext = strtolower(pathinfo($_FILES['img']['name'], PATHINFO_EXTENSION));
 
             if ($img_ext != 'jpg' && $img_ext != 'png' && $img_ext != 'jpeg') {
 
                 echo "<script>alert('Extensão de imagem inválida');</script>";
             } else {
-                // Gera um nome único para o arquivo da imagem
                 $img_name = uniqid() . '.' . $img_ext;
 
-                // Move o arquivo da imagem para a pasta de uploads
                 $move_img = move_uploaded_file($_FILES['img']['tmp_name'], '../img/' . $img_name);
 
                 if ($move_img) {
-                    // Insere o novo produto na tabela produtos (incluindo a imagem)
                     $query = "UPDATE produtos SET nome = '$nome', estoque = '$estoque', valor = '$valor', detalhes_tec = '$detalhes_tec', marca = '$marca', img_url = '$img_name' WHERE id_produto = $id_produto";
                     $mysqli->query($query);
 
@@ -41,7 +35,6 @@ if (isset($_POST['submit'])) {
                 }
             }
         } else {
-            // Insere o novo produto na tabela produtos (sem imagem)
             echo "<script>alert('A imagem não foi enviada');</script>";
         }
     } else {
@@ -56,7 +49,7 @@ if (isset($_POST['submit'])) {
 <h1 class="mt-4">Alterar Produto</h1>
 <form action="" method="POST" enctype="multipart/form-data" class="mt-4 w-50">
     <input type='hidden' name='id_produto' value='<?php echo $_POST['id_produto']; ?>'>
-    <!-- Campo para o nome do produto -->
+
     <div class="form-group row mb-3">
         <label for="nome" class="col-sm-4 col-form-label text-right">Nome:</label>
         <div class="col-sm-8">
@@ -110,7 +103,6 @@ if (isset($_POST['submit'])) {
     </div>
     
 
-    <!-- Botão para enviar o formulário -->
     <div class="form-group row mb-3">
         <div class="d-flex justify-content-center">
             <button type="submit" class="btn btn-primary w-50 mt-3" name="submit">Atualizar</button>

@@ -1,6 +1,5 @@
 <?php
 
-// Consulta SQL para listar os produtos
 $query = "SELECT p.id_produto, p.nome, p.estoque, p.valor, p.marca,
 COUNT(v.id_venda) AS num_vendas
 FROM produtos p

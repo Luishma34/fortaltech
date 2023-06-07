@@ -1,26 +1,19 @@
 <?php
-
-// Número total de vendas (com status concluido)
 $result = $mysqli->query("SELECT COUNT(*) FROM vendas WHERE status = 'concluido'");
 $total_vendas = $result->fetch_row()[0];
 
-// Valor total de todas as vendas (com status concluido)
 $result = $mysqli->query("SELECT SUM(valor_total) FROM vendas WHERE status = 'concluido'");
 $valor_total_vendas = $result->fetch_row()[0];
 
-// Número de vendas no ano atual (com status concluido)
 $result = $mysqli->query("SELECT COUNT(*) FROM vendas WHERE status = 'concluido' AND YEAR(data_venda) = YEAR(CURDATE())");
 $vendas_ano_atual = $result->fetch_row()[0];
 
-// Valor total das vendas no ano atual (com status concluido)
 $result = $mysqli->query("SELECT SUM(valor_total) FROM vendas WHERE status = 'concluido' AND YEAR(data_venda) = YEAR(CURDATE())");
 $valor_vendas_ano_atual = $result->fetch_row()[0];
 
-// Número de vendas no mês atual (com status concluido)
 $result = $mysqli->query("SELECT COUNT(*) FROM vendas WHERE status = 'concluido' AND YEAR(data_venda) = YEAR(CURDATE()) AND MONTH(data_venda) = MONTH(CURDATE())");
 $vendas_mes_atual = $result->fetch_row()[0];
 
-// Valor total das vendas no mês atual (com status concluido)
 $result = $mysqli->query("SELECT SUM(valor_total) FROM vendas WHERE status = 'concluido' AND YEAR(data_venda) = YEAR(CURDATE()) AND MONTH(data_venda) = MONTH(CURDATE())");
 $valor_vendas_mes_atual = $result->fetch_row()[0];
 

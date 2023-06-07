@@ -27,19 +27,9 @@ include_once "conexao.php";
     <main>
         <br>
         <div id="tela-inicial" class="">
-            <!-- <div class="mensagem">
-                <div id="conteudo" class="text-center mb-3">
-                    <h1 id="logo1" class="h1">Fortal<div id="logo2" class="h1">Tech</h1>
-
-                </div>
-
-                <p id="corpo" class="p text-center w-70">Bem-vindo ao FortalTech! Sua loja online de confiança para produtos eletrônicos de qualidade em Fortaleza e em todo o Brasil. Oferecemos uma ampla variedade de produtos, desde peças de computador e laptops até TVs e smartphones, todos com preços acessíveis e entrega rápida para garantir sua satisfação. Navegue agora e descubra as últimas tendências tecnológicas para levar para casa, onde quer que esteja no Brasil!</p>
-            </div> -->
-            <!-- <img src="img/ew.jpg" alt="" id="img-inicial"> -->
                 <div class="row carousel-row">
     <div class="col carousel">
         <div id="demo" class="carousel slide w-100" data-ride="carousel">
-            <!-- The slideshow -->
             <div class="carousel-inner center-block">
                 <div class="carousel-item active">
                     <img src="img/2.jpg" alt="" class="img-carousel">
@@ -52,7 +42,6 @@ include_once "conexao.php";
                 </div>
             </div>
 
-            <!-- Left and right controls -->
             <a class="carousel-control-prev" href="#demo" data-slide="prev">
                 <span class="carousel-control-prev-icon"></span>
             </a>

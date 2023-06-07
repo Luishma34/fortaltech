@@ -1,8 +1,6 @@
 <?php
 
-// Verifica se o formulário foi enviado
 if (isset($_POST['submit'])) {
-    // Obtém os dados do formulário
     $nome = trim($_POST['nome']);
     $estoque = trim($_POST['estoque']);
     $valor = trim($_POST['valor']);
@@ -13,21 +11,17 @@ if (isset($_POST['submit'])) {
 
         echo "<script>alert('Preencha todos os campos!');</script>";
     } else if (isset($_FILES['img']) && $_FILES['img']['error'] == 0) {
-        // Obtém a extensão do arquivo da imagem
         $img_ext = strtolower(pathinfo($_FILES['img']['name'], PATHINFO_EXTENSION));
 
         if ($img_ext != 'jpg' && $img_ext != 'png' && $img_ext != 'jpeg' && $img_ext != 'webp') {
 
             echo "<script>alert('Extensão de imagem inválida');</script>";
         } else {
-            // Gera um nome único para o arquivo da imagem
             $img_name = uniqid() . '.' . $img_ext;
 
-            // Move o arquivo da imagem para a pasta de uploads
             $move_img = move_uploaded_file($_FILES['img']['tmp_name'], '../img/' . $img_name);
 
             if ($move_img) {
-                // Insere o novo produto na tabela produtos (incluindo a imagem)
                 $query = "INSERT INTO produtos (nome, estoque, valor, detalhes_tec, marca, img_url)
                 VALUES ('$nome', '$estoque', '$valor', '$detalhes_tec', '$marca', '$img_name')";
                 $mysqli->query($query);
