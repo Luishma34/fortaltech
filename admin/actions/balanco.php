@@ -53,7 +53,8 @@ $vendas_6meses = $mysqli->query("
     WHERE data_venda >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
     AND status = 'concluido'
     GROUP BY mes
-    ORDER BY mes;
+    ORDER BY data_venda DESC LIMIT 6;
+
 
 
 ");
@@ -65,68 +66,88 @@ $vendas_6meses = $mysqli->query("
 <table class="table table-striped table-hover">
     <thead class="table-dark">
         <tr>
-            <th>MÊS</th>
-            <th>ANO</th>
-            <th>TOTAL DE VENDAS</th>
+            <th>Mês</th>
+            <th>Ano</th>
+            <th>Total</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td style="color:#007bff;">R$<?php echo number_format($valor_vendas_mes_atual, 2, ',', '.'); ?></td>
-            <td style="color:#007bff;">R$<?php echo number_format($valor_vendas_ano_atual, 2, ',', '.'); ?></td>
-            <td style="color:#007bff;">R$<?php echo number_format($valor_total_vendas, 2, ',', '.'); ?></td>
+            <td>R$<?php echo number_format($valor_vendas_mes_atual, 2, ',', '.'); ?></td>
+            <td>R$<?php echo number_format($valor_vendas_ano_atual, 2, ',', '.'); ?></td>
+            <td>R$<?php echo number_format($valor_total_vendas, 2, ',', '.'); ?></td>
         </tr>
     </tbody>
 </table>
 <h2>Produtos Mais Vendidos</h2>
 
 <table class="table table-striped table-hover">
-<thead class="table-dark"><tr><th>ID</th><th>Nome</th><th>Valor</th><th>Número de Vendas</th></tr></thead>
-<tbody>
-    <?php
-while ($row = $top_produtos->fetch_assoc()) {
-    echo '<tr>';
-    echo '<td style="color:#007bff;">' . $row['id_produto'] . '</td>';
-    echo '<td style="color:#007bff;">' . $row['nome'] . '</td>';
-    echo '<td style="color:#007bff;">' . 'R$' . number_format($row['valor'], 2, ',', '.') . '</td>';
-    echo '<td style="color:#007bff;">' . $row['num_vendas'] . '</td>';
-    echo '</tr>';
-}?>
-</tbody>
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Valor</th>
+            <th>Vendas</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        while ($row = $top_produtos->fetch_assoc()) {
+            echo '<tr>';
+            echo '<td>' . $row['id_produto'] . '</td>';
+            echo '<td>' . $row['nome'] . '</td>';
+            echo '<td>' . 'R$' . number_format($row['valor'], 2, ',', '.') . '</td>';
+            echo '<td>' . $row['num_vendas'] . '</td>';
+            echo '</tr>';
+        } ?>
+    </tbody>
 </table>
 
 
 <h2>Clientes com Mais Compras</h2>
 
 <table class="table table-striped table-hover">
-<thead class="table-dark"><tr><th>ID</th><th>Nome</th><th>Email</th><th>Número de Compras</th></tr></thead>
-<tbody>
-<?php
-while ($row = $top_clientes->fetch_assoc()) {
-    echo '<tr>';
-    echo '<td style="color:#007bff;">' . $row['id_cliente'] . '</td>';
-    echo '<td style="color:#007bff;">' . $row['nome'] . '</td>';
-    echo '<td style="color:#007bff;">' . $row['email'] . '</td>';
-    echo '<td style="color:#007bff;">' . $row['num_compras'] . '</td>';
-    echo '</tr>';
-}
-?>
-</tbody>
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Número de Compras</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        while ($row = $top_clientes->fetch_assoc()) {
+            echo '<tr>';
+            echo '<td>' . $row['id_cliente'] . '</td>';
+            echo '<td>' . $row['nome'] . '</td>';
+            echo '<td>' . $row['email'] . '</td>';
+            echo '<td>' . $row['num_compras'] . '</td>';
+            echo '</tr>';
+        }
+        ?>
+    </tbody>
 </table>
 
 
 <h2>Balanço dos Últimos 6 Meses</h2>
 
 <table class="table table-striped table-hover">
-<thead class="table-dark"><tr><th>Mês/Ano</th><th>Número de Vendas</th><th>Valor Arrecadado</th></tr></thead>
-<tbody>
-<?php
-while ($row = $vendas_6meses->fetch_assoc()) {
-    echo '<tr>';
-    echo '<td style="color:#007bff;">' . $row['mes'] . '</td>';
-    echo '<td style="color:#007bff;">' . $row['num_vendas'] . '</td>';
-    echo '<td style="color:#007bff;">' . '<strong>R$' . number_format($row['valor_arrecadado'], 2, ',', '.') . '</td>';
-    echo '</tr>';
-}?>
-</tbody>
+    <thead class="table-dark">
+        <tr>
+            <th>Mês/Ano</th>
+            <th>Número de Vendas</th>
+            <th>Valor Arrecadado</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        while ($row = $vendas_6meses->fetch_assoc()) {
+            echo '<tr>';
+            echo '<td>' . $row['mes'] . '</td>';
+            echo '<td>' . $row['num_vendas'] . '</td>';
+            echo '<td>' . '<strong>R$' . number_format($row['valor_arrecadado'], 2, ',', '.') . '</td>';
+            echo '</tr>';
+        } ?>
+    </tbody>
 </table>

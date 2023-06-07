@@ -30,7 +30,7 @@ include_once "../conexao.php";
     <div class="conta">
         <div id="form" class="container p-10 ">
             <form class="container-sm" method="POST">
-                <h2 class="text-center mb-3" id="logo1">Entrar</h2>
+                <h2 class="text-center mb-3" id="logo2">Entrar</h2>
                 <div class="form-floating mb-3">
                     <input type="email" class="form-control rounded-3" id="email" placeholder="name@example.com" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
                     <label for="email">E-mail</label>

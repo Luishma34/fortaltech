@@ -1,5 +1,7 @@
 <?php
-$query = "SELECT clientes.id_cliente, clientes.nome, clientes.email, IFNULL(COUNT(vendas.id_venda), 0) AS num_vendas FROM clientes LEFT JOIN vendas ON clientes.id_cliente = vendas.id_cliente AND vendas.status = 'concluido' GROUP BY clientes.id_cliente";
+$query = "SELECT clientes.id_cliente, clientes.nome, clientes.email, IFNULL(COUNT(vendas.id_venda), 0) AS num_vendas FROM clientes LEFT JOIN vendas ON clientes.id_cliente = vendas.id_cliente AND vendas.status = 'concluido' WHERE clientes.email != 'admin@admin.com'
+GROUP BY clientes.id_cliente;
+";
 $result = $mysqli->query($query);
 ?>
 <h1>Clientes</h1>
@@ -18,10 +20,10 @@ $result = $mysqli->query($query);
         <?php
         while ($row = mysqli_fetch_assoc($result)) {
             echo "<tr>";
-            echo "<td style='color:#007bff;'>" . $row['id_cliente'] . "</td>";
-            echo "<td style='color:#007bff;'>" . $row['nome'] . "</td>";
-            echo "<td style='color:#007bff;'>" . $row['email'] . "</td>";
-            echo "<td style='color:#007bff;'>" . $row['num_vendas'] . "</td>";
+            echo "<td>" . $row['id_cliente'] . "</td>";
+            echo "<td>" . $row['nome'] . "</td>";
+            echo "<td>" . $row['email'] . "</td>";
+            echo "<td>" . $row['num_vendas'] . "</td>";
             echo "<td><form method='post' action=''><input type='hidden' name='id_cliente' value='" . $row['id_cliente'] . "'><input type='submit' id='btn-apagar' class='text-danger' name='apagar' value='Apagar'></form></td>";
             echo "</tr>";
         }?>

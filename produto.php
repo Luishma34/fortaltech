@@ -38,7 +38,7 @@ include_once "conexao.php";
                         $produto = $result->fetch_assoc();
                     ?>
                         <div class="col-md-6 mt-4 mb-4 img-produto-container">
-                            <img src="<?php echo "img/" . $produto['img_url']; ?>" alt="<?php echo $produto['nome']; ?>" class="img-produto">
+                            <img style="max-width: 100%;" src="<?php echo "img/" . $produto['img_url']; ?>" alt="<?php echo $produto['nome']; ?>" class="img-produto">
                         </div>
                         <div class="col-md-6 mt-4 dados">
                             <h2><?php echo $produto['nome']; ?></h2>

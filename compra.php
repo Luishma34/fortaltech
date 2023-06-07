@@ -50,16 +50,19 @@ include_once "conexao.php";
                         <?php if (count($endereco) > 0) {
                             foreach ($endereco as $e) : ?>
                                 <div class="border mb-2 p-3">
-                                    <input type="radio" <?php if ($primeiro) {
-                                                            echo "checked";
-                                                            $primeiro = false;
-                                                        } ?> name="endereco" id="endereco:<?php echo $e['id_endereco'] ?>" value="<?php echo $e['id_endereco']; ?>">
-                                    <?php echo "<label for='endereco:" . $e['id_endereco'] . "'>" . $e['estado'] . " - " . $e['cidade'] . " - " . $e['rua'] . " - " . $e['bairro'] . " - " . $e['num_casa'] . " - " . $e['cep'] . "</label>"; ?>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div><input type="radio" <?php if ($primeiro) {
+                                                                        echo "checked";
+                                                                        $primeiro = false;
+                                                                    } ?> name="endereco" id="endereco:<?php echo $e['id_endereco'] ?>" value="<?php echo $e['id_endereco']; ?>">
 
-                                    <!-- Adicione o botão de exclusão aqui -->
-                                    <button type="submit" name="excluir_endereco" id='btn-apagar' class='text-danger' class="mr-0" value="<?php echo $e['id_endereco']; ?>" class="ml-auto">Excluir</button>
+                                            <?php echo "<label for='endereco:" . $e['id_endereco'] . "'>" . $e['estado'] . " - " . $e['cidade'] . " - " . $e['rua'] . " - " . $e['bairro'] . " - " . $e['num_casa'] . " - " . $e['cep'] . "</label>"; ?></div>
 
-                                                    </div>
+                                        <!-- Adicione o botão de exclusão aqui -->
+                                        <button type="submit" name="excluir_endereco" id='btn-apagar' class='text-danger' class="mr-0" value="<?php echo $e['id_endereco']; ?>" class="ml-auto">Excluir</button>
+                                    </div>
+
+                                </div>
 
                         <?php endforeach;
                         } ?>
@@ -71,7 +74,7 @@ include_once "conexao.php";
                             $mysqli->query("DELETE FROM endereco WHERE id_endereco = $id_endereco");
                             echo "<script> window.location.href = window.location.href; </script>";
                         }
-                        
+
                         ?>
                         <div class="border p-3">
                             <input type="radio" id="novo-endereco" name="endereco" value="novo">
@@ -119,19 +122,19 @@ include_once "conexao.php";
                                     </div>
                                 </div>
                                 <div class="form-group row mb-3">
-                                    <label for="rua" class="col-sm-4 col-form-label text-right">Rua</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control" name="rua" id="rua" required>
-                                    </div>
-                                </div>
-                                <div class="form-group row mb-3">
                                     <label for="bairro" class="col-sm-4 col-form-label text-right">Bairro</label>
                                     <div class="col-sm-8">
                                         <input type="text" class="form-control" name="bairro" id="bairro" required>
                                     </div>
                                 </div>
                                 <div class="form-group row mb-3">
-                                    <label for="numCasa" class="col-sm-4 col-form-label text-right">NÚmero da casa</label>
+                                    <label for="rua" class="col-sm-4 col-form-label text-right">Rua</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" name="rua" id="rua" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row mb-3">
+                                    <label for="numCasa" class="col-sm-4 col-form-label text-right">Número da casa</label>
                                     <div class="col-sm-8">
                                         <input type="text" class="form-control" name="numCasa" id="numCasa" required>
                                     </div>
@@ -159,26 +162,29 @@ include_once "conexao.php";
                         ?>
                         <?php if (count($cartao) > 0) {
                             foreach ($cartao as $c) : ?>
-                                <div class="border mb-2 p-3">
-                                    <input type="radio" <?php if ($primeiroCartao) {
-                                                            echo "checked";
-                                                            $primeiroCartao = false;
-                                                        } ?> name="cartao" id="cartao:<?php echo $c['id_cartao'] ?>" value="<?php echo $c['id_cartao']; ?>">
-                                    <?php echo "<label for='cartao:" . $c['id_cartao'] . "'>" . $c['num_cartao'] . " - " . $c['nome_titular'] . " - " . $c['validade'] . " - " . $c['cvv'] . "</label>"; ?>
-                                    <button type="submit" name="excluir_cartao" id='btn-apagar' class='text-danger' class="mr-0" value="<?php echo $c['id_cartao']; ?>" class="ml-auto">Excluir</button>
+                                <div class="border mb-2 p-3 d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <input type="radio" <?php if ($primeiroCartao) {
+                                                                    echo "checked";
+                                                                    $primeiroCartao = false;
+                                                                } ?> name="cartao" id="cartao:<?php echo $c['id_cartao'] ?>" value="<?php echo $c['id_cartao']; ?>">
+                                            <?php echo "<label for='cartao:" . $c['id_cartao'] . "'>" . $c['num_cartao'] . " - " . $c['nome_titular'] . " - " . $c['validade'] . " - " . $c['cvv'] . "</label>"; ?>
+                                        </div>
+                                        <button type="submit" name="excluir_cartao" id='btn-apagar' class='text-danger' class="mr-0" value="<?php echo $c['id_cartao']; ?>" class="ml-auto">Excluir</button>
+                                    
                                 </div>
 
                         <?php endforeach;
                         } ?>
 
-<?php
+                        <?php
                         if (isset($_POST['excluir_cartao'])) {
                             $id_endereco = $_POST['excluir_cartao'];
                             $mysqli->query("DELETE FROM vendas WHERE id_cartao = $id_endereco");
                             $mysqli->query("DELETE FROM cartao WHERE id_cartao = $id_endereco");
                             echo "<script> window.location.href = window.location.href; </script>";
                         }
-                        
+
                         ?>
                         <div class="border p-3">
                             <input type="radio" id="novo-cartao" name="cartao" value="novo">
@@ -246,7 +252,7 @@ include_once "conexao.php";
                     </div>
                     <div class="row mb-3">
                         <div class="col">Estimativa de Entrega</div>
-                        <div class="col"><?php echo date('Y-m-d', strtotime('+7 days')); ?></div>
+                        <div class="col"><?php echo date("d/m/Y", strtotime(date('Y-m-d', strtotime('+7 days')))); ?></div>
                     </div>
 
                     <div id="alert"></div>
@@ -316,13 +322,18 @@ include_once "conexao.php";
                 }
             }
 
-            $mysqli->query("INSERT INTO vendas(id_produto, id_cliente, id_cartao, id_endereco, quantidade, valor_parcela, valor_total, parcelas, status, data_venda, data_entrega) VALUES ('" . $_GET['produto'] . "','" . $_SESSION['id'] . "','$cartao','$endereco','1','" . $produto['valor'] / $parcela . "','" . $produto['valor'] . "', $parcela,'pendente','" . date('Y-m-d') . "','" . date('Y-m-d', strtotime('+7 days')) . "')");
+            if ($mysqli->query("INSERT INTO vendas(id_produto, id_cliente, id_cartao, id_endereco, quantidade, valor_parcela, valor_total, parcelas, status, data_venda, data_entrega) VALUES ('" . $_GET['produto'] . "','" . $_SESSION['id'] . "','$cartao','$endereco','1','" . $produto['valor'] / $parcela . "','" . $produto['valor'] . "', $parcela,'pendente','" . date('Y-m-d') . "','" . date('Y-m-d', strtotime('+7 days')) . "')")) {
 
-            $mysqli->query("UPDATE produtos SET estoque = estoque - 1 WHERE id_produto = '" . $_GET['produto'] . "'");
-            echo "<script>alert('Compra realizada com sucesso!');
+                $mysqli->query("UPDATE produtos SET estoque = estoque - 1 WHERE id_produto = '" . $_GET['produto'] . "'");
+                echo "<script>alert('Compra realizada com sucesso!');
             window.location.href = 'http://localhost/ft/conta/pedidos.php';
-            
             </script>";
+            } else {
+                echo "<script>
+                            var alert = document.getElementById('alert');
+                            alert.innerHTML = `<div class='text-danger h6 mb-3'><i class='bi bi-exclamation-circle'></i>erro na compra: $mysqli->error!</div>`;
+                            </script>";
+            }
         }
     }
     ?>

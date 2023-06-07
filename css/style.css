@@ -1,6 +1,4 @@
-/* #0f132ec2 #19274e #536d88 #b49b85 #eac195  rgb(235, 235, 235) #00b4cc #008c9e #1c31a5  #0b36cd*/
-/* as cores foram do site paleta de cores */
-/* atalho para colocar um comentário é apertar CTRL com PONTO E VÌRGULA  */
+
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200&display=swap');
 
 * {
@@ -54,12 +52,12 @@ footer {
 
 #pesquisar-btn {
     color: white;
-    border: solid 1px white;
+    background-color: #000000;
+    border: solid white 1px;
 }
 
 #pesquisar-btn:hover {
-    color: #000000;
-    background-color: rgb(255, 255, 255);
+    background-color: #007bff;
 }
 
 #img-inicial {

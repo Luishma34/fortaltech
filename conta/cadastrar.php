@@ -30,7 +30,7 @@ include_once "../conexao.php";
     <div class="conta">
         <div id="form" class="container p-10">
             <form class="container" method="POST">
-                <h2 class="text-center mb-3" id="logo1">Bem-vindo!</h2>
+                <h2 class="text-center mb-3" id="logo2">Bem-vindo!</h2>
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control rounded-3" id="nome" placeholder="Nome" name="nome" required>
                     <label for="nome">Nome</label>

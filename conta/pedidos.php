@@ -30,7 +30,7 @@ include_once "../conexao.php";
             <?php require_once "../template/nav.php";  ?>
         </header>
         <main>
-            <ul class="nav justify-content-center mt-3">
+            <ul class="nav justify-content-center mt-3 mb-3">
                 <li class="nav-item">
                     <a class="nav-link color-dark" href="?status=pendente">PENDENTES</a>
                 </li>
@@ -47,20 +47,21 @@ include_once "../conexao.php";
                     <a class="nav-link color-dark" href="?status=cancelado">CANCELADOS</a>
                 </li>
             </ul>
-            <div class="container">
+
+            <?php
+            $status = isset($_GET['status']) ? $_GET['status'] : 'pendente';
+            $result = $mysqli->query("SELECT * FROM vendas where id_cliente = " . $_SESSION["id"] . " AND status = '$status'");
+            $pedido = array();
+            while ($row = $result->fetch_assoc()) {
+                $pedido[] = $row;
+            }
+            if (count($pedido) > 0) {  ?>
                 <?php
-                $status = isset($_GET['status']) ? $_GET['status'] : 'pendente';
-                $result = $mysqli->query("SELECT * FROM vendas where id_cliente = " . $_SESSION["id"] . " AND status = '$status'");
-                $pedido = array();
-                while ($row = $result->fetch_assoc()) {
-                    $pedido[] = $row;
-                }
-                if (count($pedido) > 0) {  ?>
-                    <?php
-                    foreach ($pedido as $p) :
-                        $result = $mysqli->query("SELECT * FROM produtos where id_produto = " . $p["id_produto"]);
-                        $produto = $result->fetch_assoc();
-                    ?>
+                foreach ($pedido as $p) :
+                    $result = $mysqli->query("SELECT * FROM produtos where id_produto = " . $p["id_produto"]);
+                    $produto = $result->fetch_assoc();
+                ?>
+                    <div class="container mb-3">
                         <div class="pedido <?php echo ($p["status"] == 'cancelado' ? 'cancelado' : ($p["status"] == 'concluido' ? 'concluido' : '')) ?>">
                             <div class="pedido-header <?php echo ($p["status"] == 'cancelado' ? 'header-cancelado' : ($p["status"] == 'concluido' ? 'header-concluido' : 'header-pendente')) ?>">
                                 <?php echo $produto["nome"]; ?>
@@ -68,14 +69,14 @@ include_once "../conexao.php";
                             <div class="pedido-body">
                                 <div class="row">
                                     <div class="col-sm-<?php echo ($p["status"] == 'pendente' ? '4' : '6'); ?>">
-                                        <p><span class="pedido-info">Quantidade:</span> <?php echo $p["quantidade"]; ?></p>
-                                        <p><span class="pedido-info">Valor:</span> R$<?php echo number_format($p["valor_total"], 2, ',', '.'); ?></p>
-                                        <p><span class="pedido-info">Parcelas:</span> <?php echo $p["parcelas"]; ?>x de R$<?php echo number_format($p["valor_parcela"], 2, ',', '.'); ?></p>
+                                        <p><strong>Quantidade:</strong> <?php echo $p["quantidade"]; ?></p>
+                                        <p><strong>Valor:</strong> R$<?php echo number_format($p["valor_total"], 2, ',', '.'); ?></p>
+                                        <p><strong>Parcelas:</strong> <?php echo $p["parcelas"]; ?>x de R$<?php echo number_format($p["valor_parcela"], 2, ',', '.'); ?></p>
                                     </div>
                                     <div class="col-sm-<?php echo ($p["status"] == 'pendente' ? '4' : '6'); ?>">
-                                        <p><span class="pedido-info">Status:</span> <?php echo $p["status"]; ?></p>
-                                        <p><span class="pedido-info">Data de compra:</span> <?php echo $p["data_venda"]; ?></p>
-                                        <p><span class="pedido-info">Estimativa de entrega:</span> <?php echo $p["data_entrega"]; ?></p>
+                                        <p><strong>Status:</strong> <span class="status-<?php echo $p["status"] ?>"><?php echo $p["status"]; ?></span></p>
+                                        <p><strong>Data de compra:</strong> <?php echo date("d/m/Y", strtotime($p["data_venda"])); ?></p>
+                                        <p><strong>Estimativa de entrega:</strong> <?php echo date("d/m/Y", strtotime($p["data_entrega"])); ?></p>
                                     </div>
                                     <?php if ($p["status"] == 'pendente') : ?>
                                         <div class="col-sm-4 d-flex flex-column align-items-center justify-content-center">
@@ -91,34 +92,34 @@ include_once "../conexao.php";
 
                             </div>
                         </div>
-            </div>
-        <?php endforeach; ?>
+                    </div>
+                <?php endforeach; ?>
 
-    <?php
-                } else {
-                    echo '<h2 class="text-center mt-5">Nenhuma registro encontrado!</h2>';
+            <?php
+            } else {
+                echo '<h2 class="text-center mt-5">Nenhuma registro encontrado!</h2>';
+            }
+            if (isset($_POST["cancelar_pedido"])) {
+                $idVenda = $_POST["id_venda"];
+                if (isset($idVenda)) {
+                    $mysqli->query("UPDATE vendas SET status = 'cancelado' WHERE id_venda = " . $idVenda);
+                    echo "<script>alert('Pedido cancelado com sucesso!');</script>";
+                    echo "<script>window.location.href = window.location.href;</script>";
                 }
-                if (isset($_POST["cancelar_pedido"])) {
-                    $idVenda = $_POST["id_venda"];
-                    if (isset($idVenda)) {
-                        $mysqli->query("UPDATE vendas SET status = 'cancelado' WHERE id_venda = " . $idVenda);
-                        echo "<script>alert('Pedido cancelado com sucesso!');</script>";
-                        echo "<script>window.location.href = window.location.href;</script>";
-                    }
-                } else if (isset($_POST["pedido_recebido"])) {
-                    $idVenda = $_POST["id_venda"];
-                    if (isset($idVenda)) {
-                        $mysqli->query("UPDATE vendas SET status = 'concluido' WHERE id_venda = " . $idVenda);
-                        echo "<script>alert('Pedido entregue com sucesso!');</script>";
-                        echo "<script>window.location.href = window.location.href;</script>";
-                    }
+            } else if (isset($_POST["pedido_recebido"])) {
+                $idVenda = $_POST["id_venda"];
+                if (isset($idVenda)) {
+                    $mysqli->query("UPDATE vendas SET status = 'concluido' WHERE id_venda = " . $idVenda);
+                    echo "<script>alert('Pedido entregue com sucesso!');</script>";
+                    echo "<script>window.location.href = window.location.href;</script>";
                 }
-    ?>
-    </div>
-    </main>
+            }
+            ?>
+        </main>
     </div>
     <div class="container">
         <?php require_once "../template/footer.php";  ?>
+    </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
     <script src="../js/js.js"></script>
